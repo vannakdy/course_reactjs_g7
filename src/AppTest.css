@@ -1,0 +1,38 @@
+.txtMain{
+    font-size: 98px;
+    color:blue;
+}
+
+.btnBlack{
+    padding:15px;
+    min-width:150px;
+    color:white;
+    font-weight:bold;
+    font-size:16px;
+    background-color:black;
+    border:none;
+    border-radius:10px;
+    margin-top: 20px;
+}
+
+.input {
+    height: 30px;
+    min-width: 200px;
+    padding: 4px 10px;
+    border: 0.5px solid #888888;
+}
+
+.color-red {
+    color : red
+}
+
+.color-yellow {
+    color : yellow
+}
+
+.arr-name {
+    background-color: rgb(167, 153, 153);
+}
+.arr-name:hover {
+    background-color: brown;
+}
