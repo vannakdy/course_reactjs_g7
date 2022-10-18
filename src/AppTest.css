@@ -36,3 +36,26 @@
 .arr-name:hover {
     background-color: brown;
 }
+
+.btn{
+    min-width: 200px;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 40px;
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.count-container{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.txt-count{
+    font-size: 20px;
+    color: red;
+    padding: 0 10px;
+}

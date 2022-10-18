@@ -14,6 +14,14 @@
 + render list
 
 + State
+    - declare state
+    - use status
+    - call
+    - modify : setter
+
+    - default value of state
++ Even in Reactjs
+
 
 + Component
 
