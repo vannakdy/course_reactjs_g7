@@ -38,7 +38,6 @@ function App () {
     setOptoinValue(number)
   }
 
-  // var a = ( (2 == 2 && 1 == 1 ) ? 100 : 200)
   return (
     <div>
       {/* <h1>value x = {x}</h1>
@@ -54,7 +53,6 @@ function App () {
       <button onClick={onClickBtn1} className='btn'>Click</button> */}
       <h2>Option increase/decrease</h2>
       <h2>{optionValue}</h2>
-
       <div className='contain-item'>
         {arrOption.map((item,index)=>{
           return (
