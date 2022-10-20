@@ -2,75 +2,98 @@ import {useState} from 'react';
 import "./AppTest.css";
 
 function App () {
-  // sytax
-  // const [stateName,setter] = useState(default_value)
-  // default_value : number , string, boolean, object array....
-  const [x,setX] = useState(0); // completed declare state in react
-  const [y,setY] = useState(1);
-  const [name,setName] = useState("Sok Dara");
-  const [arrName,setArrName] = useState(["Join","Jully","Som"])
-  const [mynumber,setMynumber] = useState(0);
-  const [arrOption , setArrOption ] = useState([1,2,3,4,5,6,7,8,9,10,11,22])
-  const [optionValue,setOptoinValue] = useState(1)
 
-  function onClickBtn1(){
-    // // alert(99)
-    // var a = 10;
-    // var b = 20;
-    // var sum = a + b;
-    // console.log("sum = "+sum)
-    setX(1000000);
-    setY(100);
-    setName("KOKO")
-    setArrName(["AA","BB","CC"])
+  const [a,setA] = useState(0)
+  const [b,setB] = useState(0)
+  const [opSym,setOpSym] = useState("+")
+  const [result,setResult] = useState(0)
+
+
+  function onChageA(e){
+    // console.log("a",e.target.value)
+    setA(e.target.value)
+    if(opSym == "+"){
+      setResult(Number(e.target.value) + Number(b))
+    }else if(opSym == "-"){
+      setResult(Number(e.target.value) - Number(b))
+    }else if(opSym == "*"){
+      setResult(Number(e.target.value) * Number(b))
+    }else if(opSym == "/"){
+      setResult(Number(e.target.value) / Number(b))
+    }
+    
   }
 
-  function onClickDecrease(){
-    setMynumber(mynumber-optionValue)
+  function onChageB(e){
+    // console.log("b",e.target.value)
+    setB(e.target.value)
+    if(opSym == "+"){
+      setResult(Number(a)  +  Number(e.target.value))
+    }else if(opSym == "-"){
+      setResult(Number(a)  -  Number(e.target.value))
+    }else if(opSym == "*"){
+      setResult(Number(a)  *  Number(e.target.value))
+    }else if(opSym == "/"){
+      setResult(Number(a)  /  Number(e.target.value))
+    }
+   
   }
 
-  function onClickIncrease(){
-    setMynumber(mynumber+optionValue)
-    onClickBtn1();
+  function onClickAdd(){
+    // var sum = Number(a) + Number(b)
+    setResult(Number(a) + Number(b));
+    setOpSym("+")
   }
 
-  function onClickChageOption(number){
-    setOptoinValue(number)
+  function onClickSub(){
+    var sub = Number(a) - Number(b)
+    setResult(sub);
+    setOpSym("-")
   }
 
-  // var a = ( (2 == 2 && 1 == 1 ) ? 100 : 200)
+  function onClickMul(){
+    var mul = Number(a) * Number(b)
+    setResult(mul);
+    setOpSym("*")
+  }
+
+  function onClickDel(){
+    var dev = Number(a) / Number(b)
+    setResult(dev);
+    setOpSym("/")
+  }
+
+  function onClickClear(){
+    setA(0);
+    setB(0);
+    setResult(0);
+  }
+
   return (
-    <div>
-      {/* <h1>value x = {x}</h1>
-      <h1>value y = {y}</h1>
-      <h1>value name = {name}</h1>
-      {arrName.map((item,index)=>{
-        return (
-          <div>
-            <h1>{item}</h1>
-          </div>
-        )
-      })}
-      <button onClick={onClickBtn1} className='btn'>Click</button> */}
-      <h2>Option increase/decrease</h2>
-      <h2>{optionValue}</h2>
+    <div className='content'>
+        <h2>Demo state</h2>
+        <input
+          className='input'
+          placeholder='Input Value A'
+          value={a}
+          onChange={onChageA}
+        />
+        <br/>
+        <input
+          value={b}
+          className='input'
+          placeholder='Input Value B'
+          onChange={onChageB}
+        />
+        <h2>Result = {a} {opSym} {b} = {result}</h2>
 
-      <div className='contain-item'>
-        {arrOption.map((item,index)=>{
-          return (
-            <div onClick={()=>onClickChageOption(item)} className={item == optionValue ? "item-select-active" : "item-select"}>
-              {item}
-            </div>
-          )
-        })}
-      </div>
-
-      <div className='count-container'>
-          <button onClick={onClickDecrease} className='btn'>-</button>
-          <div className='txt-count'>{mynumber}</div>
-          <button onClick={onClickIncrease} className='btn'>+</button>
-      </div>
-
+        <div>
+          <button onClick={onClickAdd} className='btn'>Add</button>
+          <button onClick={onClickSub} className='btn'>Sub</button> <br/>
+          <button onClick={onClickMul} className='btn'>Mul</button>
+          <button onClick={onClickDel} className='btn'>Dev</button> <br/>
+          <button onClick={onClickClear} className='btn'>Clear</button>
+        </div>
     </div>
   )
 }
