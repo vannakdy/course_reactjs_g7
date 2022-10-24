@@ -1,3 +1,6 @@
+.container {
+    padding: 20px;
+}
 .txtMain{
     font-size: 98px;
     color:blue;
@@ -92,6 +95,39 @@
     margin-top: 10px;
     border-radius: 5px;
     font-size: 16px;
+}
+
+.container-size{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.txtTitle{
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.boxSizeColor{
+    padding: 5px 10px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.boxSizeColorActive{
+    padding: 5px 10px;
+    border: 1px solid rgb(211, 107, 54);
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 

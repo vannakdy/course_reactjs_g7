@@ -1,99 +1,148 @@
-import {useState} from 'react';
+
+import { useState } from "react";
 import "./AppTest.css";
 
-function App () {
+function App(){
+  const [arrSize,setArrSize] = useState([
+    {
+      id : 1,
+      title : "S"
+    },
+    {
+      id : 2,
+      title : "M"
+    },
+    {
+      id : 3,
+      title : "L"
+    },
+    {
+      id : 4,
+      title : "XL"
+    },
+    {
+      id : 5,
+      title : "2XL"
+    },
+  ])
+  const [sizeId,setSizeId] = useState(1);
 
-  const [a,setA] = useState(0)
-  const [b,setB] = useState(0)
-  const [opSym,setOpSym] = useState("+")
-  const [result,setResult] = useState(0)
+  const [arrColor,setArrColor] = useState([
+    {
+      id : 1,
+      title : "Black"
+    },
+    {
+      id : 2,
+      title : "Rel"
+    },
+    {
+      id : 3,
+      title : "Blue"
+    },
+    {
+      id : 4,
+      title : "Gray"
+    },
+    {
+      id : 5,
+      title : "White"
+    },
+  ])
+  const [colorId,setColorId] = useState(1)
+
+  const [arrBrand,setArrBrand] = useState([
+    {
+      id : 1,
+      title : "ZARA"
+    },
+    {
+      id : 2,
+      title : "Routin"
+    },
+    {
+      id : 3,
+      title : "TE11"
+    },
+    {
+      id : 4,
+      title : "LV"
+    },
+    {
+      id : 5,
+      title : "361"
+    },
+  ])
+  const [brandId,setBrandId] = useState(1)
 
 
-  function onChageA(e){
-    // console.log("a",e.target.value)
-    setA(e.target.value)
-    if(opSym == "+"){
-      setResult(Number(e.target.value) + Number(b))
-    }else if(opSym == "-"){
-      setResult(Number(e.target.value) - Number(b))
-    }else if(opSym == "*"){
-      setResult(Number(e.target.value) * Number(b))
-    }else if(opSym == "/"){
-      setResult(Number(e.target.value) / Number(b))
-    }
-    
+  function onClickSize (id) {
+    setSizeId(id)
   }
 
-  function onChageB(e){
-    // console.log("b",e.target.value)
-    setB(e.target.value)
-    if(opSym == "+"){
-      setResult(Number(a)  +  Number(e.target.value))
-    }else if(opSym == "-"){
-      setResult(Number(a)  -  Number(e.target.value))
-    }else if(opSym == "*"){
-      setResult(Number(a)  *  Number(e.target.value))
-    }else if(opSym == "/"){
-      setResult(Number(a)  /  Number(e.target.value))
-    }
-   
+  function onClickColor (id) {
+    setColorId(id)
   }
 
-  function onClickAdd(){
-    // var sum = Number(a) + Number(b)
-    setResult(Number(a) + Number(b));
-    setOpSym("+")
-  }
-
-  function onClickSub(){
-    var sub = Number(a) - Number(b)
-    setResult(sub);
-    setOpSym("-")
-  }
-
-  function onClickMul(){
-    var mul = Number(a) * Number(b)
-    setResult(mul);
-    setOpSym("*")
-  }
-
-  function onClickDel(){
-    var dev = Number(a) / Number(b)
-    setResult(dev);
-    setOpSym("/")
-  }
-
-  function onClickClear(){
-    setA(0);
-    setB(0);
-    setResult(0);
+  function onClickBrand(id){
+    setBrandId(id)
   }
 
   return (
-    <div className='content'>
-        <h2>Demo state</h2>
-        <input
-          className='input'
-          placeholder='Input Value A'
-          value={a}
-          onChange={onChageA}
-        />
-        <br/>
-        <input
-          value={b}
-          className='input'
-          placeholder='Input Value B'
-          onChange={onChageB}
-        />
-        <h2>Result = {a} {opSym} {b} = {result}</h2>
+    <div className="container">
 
-        <div>
-          <button onClick={onClickAdd} className='btn'>Add</button>
-          <button onClick={onClickSub} className='btn'>Sub</button> <br/>
-          <button onClick={onClickMul} className='btn'>Mul</button>
-          <button onClick={onClickDel} className='btn'>Dev</button> <br/>
-          <button onClick={onClickClear} className='btn'>Clear</button>
+      <div className="container-size">
+        <div className="txtTitle">Size</div>
+        <div className="row">
+          {arrSize.map((item,index)=>{
+            return (
+              <div 
+                key={index} 
+                onClick={()=>onClickSize(item.id)} 
+                className={item.id === sizeId ? "boxSizeColorActive" : "boxSizeColor"}
+              >
+                {item.title}
+              </div>
+            )
+          })}
         </div>
+      </div>
+
+
+      <div className="container-size">
+        <div className="txtTitle">Color</div>
+        <div className="row">
+          {arrColor.map((item,index)=>{
+            return (
+              <div 
+                key={index} 
+                onClick={()=>onClickColor(item.id)} 
+                className={item.id === colorId ? "boxSizeColorActive" : "boxSizeColor"}
+              >
+                {item.title}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      <div className="container-size">
+        <div className="txtTitle">Brand</div>
+        <div className="row">
+          {arrBrand.map((item,index)=>{
+            return (
+              <div 
+                key={index} 
+                onClick={()=>onClickBrand(item.id)} 
+                className={item.id === brandId ? "boxSizeColorActive" : "boxSizeColor"}
+              >
+                {item.title}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
     </div>
   )
 }
