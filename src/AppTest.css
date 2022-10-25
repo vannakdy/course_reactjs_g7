@@ -18,6 +18,14 @@
     margin-top: 20px;
 }
 
+.txtQty{
+    min-width: 30px;
+    padding: 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
 .input {
     height: 30px;
     min-width: 200px;
@@ -41,14 +49,16 @@
 }
 
 .btn{
-    min-width: 200px;
+    /* min-width: 00px; */
     border: 1px solid black;
     border-radius: 5px;
     height: 40px;
+    padding: 0 20px;
     background-color: white;
     color: black;
     font-size: 18px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .count-container{
@@ -106,6 +116,7 @@
 .row {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .txtTitle{
@@ -128,6 +139,17 @@
     border-radius: 5px;
     margin-right: 10px;
     cursor: pointer;
+}
+
+.containerQty{
+    margin-top: 10px;
+}
+
+.listCart{
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    display: flex;
+    flex-direction: row;
 }
 
 
