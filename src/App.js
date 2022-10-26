@@ -6,6 +6,8 @@ import {
   AiFillPlusCircle,
   AiFillMinusCircle,
 } from "react-icons/ai";
+import {MdDelete} from "react-icons/md"
+import {AiOutlineCloud} from "react-icons/ai"
 
 function App() {
   const [arrSize, setArrSize] = useState([
@@ -39,7 +41,7 @@ function App() {
     },
     {
       id: 2,
-      title: "Rel",
+      title: "Red",
     },
     {
       id: 3,
@@ -81,6 +83,8 @@ function App() {
   const [brandId, setBrandId] = useState(1);
   const [qty,setQty] = useState(1)
   const [price,setPrice] = useState(10)
+  const [pname,setPname] = useState("Women Jean")
+  const [code,setCode] = useState(45679997)
 
   const [arrProduct,setArrProduct] = useState([])
 
@@ -106,27 +110,66 @@ function App() {
     setQty(qty+1)
   }
 
+  function getOptionLabel(idSelected,arrOption){
+    var name = ""
+    for(var i = 0 ; i < arrOption.length ; i++){
+      if(idSelected == arrOption[i].id){
+        name = arrOption[i].title;
+        break;
+      }
+    }
+    return name;
+  }
+
   function onClickAddToBag(){
+    var size = getOptionLabel(sizeId,arrSize);
+    var color = getOptionLabel(colorId,arrColor);
+    var brand = getOptionLabel(brandId,arrBrand);
     var itemProduct = {
-      pname : "Women Jen",
-      code : "45679997",
-      price : 10,
-      size : "S",
-      color : "Black",
-      brand : "ZARA",
-      qty : 2,
-      total : 20
+      pname : pname,
+      code :code,
+      price : price,
+      size : size,
+      color : color,
+      brand : brand ,
+      qty : qty,
+      total : qty * price
     }
     var arrTmp = [...arrProduct,itemProduct]; // concat item to array
     
     setArrProduct(arrTmp)
   }
 
+  function onClickRemove(item,index){
+    // // way 1
+    // var newItem = arrProduct 
+    // newItem.splice(index,1)
+    // way 2
+    var newItem = arrProduct.filter((item,indexItem)=>indexItem != index) // way2
+    setArrProduct([...newItem])
+    alert("Remove success!")
+  }
+
   return (
     <div className="container">
-      <div className="txtTitle">Women Jean</div>
+      <input 
+        className="input"
+        placeholder="Product Name"
+        onChange={(e)=>setPname(e.target.value)}
+      /><br/>
+      <input 
+        className="input"
+        placeholder="Code"
+        onChange={(e)=>setCode(e.target.value)}
+      /><br/>
+      <input 
+        className="input"
+        placeholder="Price"
+        onChange={(e)=>setPrice(Number(e.target.value))}
+      /><br/>
+      {/* <div className="txtTitle">Women Jean</div>
       <div className="txtTitle">Code. 45679997</div>
-      <div className="txtTitle">Price : {price}$</div>
+      <div className="txtTitle">Price : {price}$</div> */}
 
       <div className="container-size">
         <div className="txtTitle">Size</div>
@@ -203,17 +246,29 @@ function App() {
 
       {/* vannak */}
       <h1>List Cart ({arrProduct.length})</h1>
+
+      {arrProduct.length == 0 && 
+        <div>
+          <AiOutlineCloud style={{fontSize:22}} />
+          <div>No Iitem</div>
+        </div>
+      }
+
       {arrProduct.map((item,index)=>{
         return (
           <div className="listCart" key={index}>
             <div>
-              <div>{item.pname}</div>
+              <div style={{fontSize:18,fontWeight:"bold",marginBottom:5}}>{item.pname}</div>
               <div>{item.code}</div>
               <div>{item.size} / {item.color} / {item.brand}</div>
             </div>
             <div style={{marginLeft: 20}}>
-              <div>1 * {item.price}$</div>
+              <div>{item.qty} * {item.price}$</div>
               <div>{item.total}$</div>
+            </div>
+
+            <div style={{marginLeft: 20}}>
+              <MdDelete onClick={()=>onClickRemove(item,index)} style={{fontSize:18,color:'brown'}}/>
             </div>
             
           </div>
