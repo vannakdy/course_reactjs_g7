@@ -22,10 +22,30 @@
     - default value of state
 + Even in Reactjs
 
++ Config Route
+    > npm install react-router-dom
+    - create pages in src/page/pageName.js
+    - configure route in App.js
+        - import all we want regester
+        - import {BrowserRouter,Routes,Route,Link} from "react-router-dom"
+        - Lock lick
+            import StudentPage from "./page/StudentPage";
+            import {BrowserRouter,Routes,Route,Link} from "react-router-dom"
+
+            fucntin App(){
+                return (
+                   <BrowserRouter> 
+                        <Routes>
+                            <Route path="pathname" element={<MyPage/>}>
+                        </Routes>
+                   </BrowserRouter> 
+                )
+            }
+            export detault App;
+        
 
 + Component
 
-+ Route
 
 + Master page
 
