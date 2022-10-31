@@ -24,6 +24,7 @@ function HomePage(){
 
            
             <button onClick={onClickBtn} style={{color:'red'}}>About</button>
+            <Link to="about">About</Link>
           
 
             <Link to="/login">
