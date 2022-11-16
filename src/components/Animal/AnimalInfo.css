@@ -1,0 +1,8 @@
+.container-animal{
+    background-color: rgb(240, 230, 230);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+/* style={{backgroundColor:'#e2e2e2',padding:10,margin:10,borderRadius:10}} */

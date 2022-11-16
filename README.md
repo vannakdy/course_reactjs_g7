@@ -15,7 +15,7 @@
 
 + State
     - declare state
-    - use status
+    - use state
     - call
     - modify : setter
 

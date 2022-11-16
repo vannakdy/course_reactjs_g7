@@ -1,4 +1,8 @@
-
+.sticky-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
 .menu > a {
     color: white;
     padding: 10px;
@@ -12,6 +16,7 @@
 }
 
 .row-menu{
+    height: 60px;
     background-color: gray;
     padding: 15px 20px;
     display: flex;

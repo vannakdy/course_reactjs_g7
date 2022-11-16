@@ -10,6 +10,7 @@ function App(){
   return (
    <BrowserRouter>
       <Header />
+      <div style={{height:50}} />
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/about" element={<AboutUsPage/>} />
