@@ -59,6 +59,14 @@
     - Search data using API
 + list, update , create , delete data from API
 
++ Remove a library from React
+    to root : 
+    > npm rm module_name
+    > npx rm react-bootstrap
+    + re install
+        > npm install react-bootstrap
+
+
 
 
 

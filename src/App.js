@@ -1,3 +1,4 @@
+import "./App.css"
 import HomePage from "./page/HomePage";
 import AboutUsPage from "./page/AboutUsPage";
 import LoginPage from "./page/LoginPage";
@@ -9,16 +10,16 @@ import {BrowserRouter,Routes,Route,Link} from "react-router-dom"
 function App(){
   return (
    <BrowserRouter>
-      <Header />
-      <div style={{height:50}} />
-      <Routes>
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/about" element={<AboutUsPage/>} />
-        <Route path="/login" element={<LoginPage/>} />
-        <Route path="/register" element={<RegisterPage/>} />
-        <Route path="/student" element={<StudentPage/>} />
-        <Route path="*" element={<h1>Route Not Found!</h1>} />
-      </Routes>
+      <Header>
+        <Routes>
+          <Route path="/" element={<HomePage/>} />
+          <Route path="/about" element={<AboutUsPage/>} />
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/register" element={<RegisterPage/>} />
+          <Route path="/student" element={<StudentPage/>} />
+          <Route path="*" element={<h1>Route Not Found!</h1>} />
+        </Routes>
+      </Header>
       
    </BrowserRouter>
   )
