@@ -2,70 +2,34 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 // import Table from 'react-bootstrap/Table';
 import {Button, Table, Stack} from 'react-bootstrap';
-import {MdDelete,MdNewLabel} from "react-icons/md"
+import {MdDelete} from "react-icons/md"
 
 
-function StudentPage() {
-  const [listStudent, setListStudent] = useState([]);
+function TeacherPage() {
+  const [listTeacher, setListTeacher] = useState([]);
 
   useEffect(() => {
-    getListStudent();
+    getListTeacher();
   }, []);
 
-  const getListStudent = () => {
+  const getListTeacher = () => {
     axios({
-      url: "http://localhost:8080/api/student",
+      url: "http://localhost:8080/api/teacher",
       method: "GET",
       data: {},
       headers: {},
     }).then((res) => {
       var data = res.data;
       console.log(data)
-      setListStudent(data.list);
+      setListTeacher(data.list);
     });
   };
 
-  const onClickNew = () => {
-    axios({
-      url: "http://localhost:8080/api/student",
-      method: "POST",
-      data: {
-        "firstname" : "Sa",
-        "lastname" : "Solo",
-        "gender" : 1,
-        "tel" : "095686890",
-        "email" : "",
-        "description" : "Student year 1 from RUPP"
-      },
-      headers: {},
-    }).then((res) => {
-      var data = res.data;
-      console.log(data)
-    }).catch(err=>{
-      console.log(err)
-    })
-  }
-
-  const onClickDelete = (student_id) => {
-    axios({
-      url: "http://localhost:8080/api/student",
-      method: "DELETE",
-      data: {
-        "student_id": student_id
-      },
-      headers: {},
-    }).then((res) => {
-      var data = res.data;
-      console.log(data)
-      getListStudent()
-    });
-  }
-
   return (
     <div>
-      <div className="row-between">
-        <h1>Student {listStudent.length}</h1>
-        <Button onClick={onClickNew} variant="primary" size="sm"><MdNewLabel/>New</Button>
+      <div>
+        <h1>Teacher {listTeacher.length}</h1>
+        <Button variant="primary" size="sm"><MdDelete/>New</Button>
       </div>
       <Table striped bordered hover size="sm">
         <thead>
@@ -83,7 +47,7 @@ function StudentPage() {
         </thead>
         <tbody>
             {
-                listStudent.map((item,index)=>{
+                listTeacher.map((item,index)=>{
                     return (
                         <tr key={index}>
                             <td>{index + 1}</td>
@@ -97,7 +61,7 @@ function StudentPage() {
                             <td>
                                 <Stack gap={1} direction="horizontal">
                                     <Button variant="primary" size="sm"><MdDelete/>Edit</Button>
-                                    <Button onClick={()=>onClickDelete(item.student_id)} variant="danger" size="sm">Remove</Button>
+                                    <Button variant="danger" size="sm">Remove</Button>
                                 </Stack>
                             </td>
                         </tr>
@@ -111,4 +75,4 @@ function StudentPage() {
   );
 }
 
-export default StudentPage;
+export default TeacherPage;
