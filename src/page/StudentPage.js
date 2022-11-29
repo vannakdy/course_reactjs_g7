@@ -2,10 +2,12 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 // import Table from 'react-bootstrap/Table';
 import {Button, Table, Stack} from 'react-bootstrap';
-import {MdDelete,MdNewLabel} from "react-icons/md"
+import {MdDelete,MdNewLabel} from "react-icons/md";
+import {useNavigate} from "react-router-dom"
 
 
 function StudentPage() {
+  const navigate = useNavigate()
   const [listStudent, setListStudent] = useState([]);
 
   useEffect(() => {
@@ -26,24 +28,25 @@ function StudentPage() {
   };
 
   const onClickNew = () => {
-    axios({
-      url: "http://localhost:8080/api/student",
-      method: "POST",
-      data: {
-        "firstname" : "Sa",
-        "lastname" : "Solo",
-        "gender" : 1,
-        "tel" : "095686890",
-        "email" : "",
-        "description" : "Student year 1 from RUPP"
-      },
-      headers: {},
-    }).then((res) => {
-      var data = res.data;
-      console.log(data)
-    }).catch(err=>{
-      console.log(err)
-    })
+    navigate("/student/create")
+    // axios({
+    //   url: "http://localhost:8080/api/student",
+    //   method: "POST",
+    //   data: {
+    //     "firstname" : "Sa",
+    //     "lastname" : "Solo",
+    //     "gender" : 1,
+    //     "tel" : "095686890",
+    //     "email" : "",
+    //     "description" : "Student year 1 from RUPP"
+    //   },
+    //   headers: {},
+    // }).then((res) => {
+    //   var data = res.data;
+    //   console.log(data)
+    // }).catch(err=>{
+    //   console.log(err)
+    // })
   }
 
   const onClickDelete = (student_id) => {
