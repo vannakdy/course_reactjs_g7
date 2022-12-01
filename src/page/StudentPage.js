@@ -64,6 +64,10 @@ function StudentPage() {
     });
   }
 
+  const onClickToEdit = (student_id) => {
+    navigate("/student/create/"+student_id)
+  }
+
   return (
     <div>
       <div className="row-between">
@@ -99,7 +103,7 @@ function StudentPage() {
                             <td>{item.create_at}</td>
                             <td>
                                 <Stack gap={1} direction="horizontal">
-                                    <Button variant="primary" size="sm"><MdDelete/>Edit</Button>
+                                    <Button onClick={()=>onClickToEdit(item.student_id)} variant="primary" size="sm"><MdDelete/>Edit</Button>
                                     <Button onClick={()=>onClickDelete(item.student_id)} variant="danger" size="sm">Remove</Button>
                                 </Stack>
                             </td>
