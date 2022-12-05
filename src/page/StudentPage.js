@@ -1,28 +1,34 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 // import Table from 'react-bootstrap/Table';
-import {Button, Table, Stack} from 'react-bootstrap';
+import {Button, Table, Stack,Spinner} from 'react-bootstrap';
 import {MdDelete,MdNewLabel} from "react-icons/md";
 import {useNavigate} from "react-router-dom"
 
+const base_url = "https://nodejs-course-g2.vercel.app/";
 
 function StudentPage() {
+
   const navigate = useNavigate()
+
   const [listStudent, setListStudent] = useState([]);
+  const [loading,setLoading] = useState(false)
 
   useEffect(() => {
     getListStudent();
   }, []);
 
   const getListStudent = () => {
+    setLoading(true);
     axios({
-      url: "http://localhost:8080/api/student",
+      url: base_url + "api/student",
       method: "GET",
       data: {},
       headers: {},
     }).then((res) => {
       var data = res.data;
       console.log(data)
+      setLoading(false)
       setListStudent(data.list);
     });
   };
@@ -50,8 +56,9 @@ function StudentPage() {
   }
 
   const onClickDelete = (student_id) => {
+    setLoading(true);
     axios({
-      url: "http://localhost:8080/api/student",
+      url: base_url + "api/student",
       method: "DELETE",
       data: {
         "student_id": student_id
@@ -60,7 +67,7 @@ function StudentPage() {
     }).then((res) => {
       var data = res.data;
       console.log(data)
-      getListStudent()
+      getListStudent();
     });
   }
 
@@ -70,10 +77,16 @@ function StudentPage() {
 
   return (
     <div>
+      
       <div className="row-between">
         <h1>Student {listStudent.length}</h1>
         <Button onClick={onClickNew} variant="primary" size="sm"><MdNewLabel/>New</Button>
       </div>
+
+      {loading && <div style={{textAlign:'center'}}>
+        <Spinner animation="border" variant="secondary" /> 
+      </div>}
+
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
@@ -103,15 +116,14 @@ function StudentPage() {
                             <td>{item.create_at}</td>
                             <td>
                                 <Stack gap={1} direction="horizontal">
-                                    <Button onClick={()=>onClickToEdit(item.student_id)} variant="primary" size="sm"><MdDelete/>Edit</Button>
-                                    <Button onClick={()=>onClickDelete(item.student_id)} variant="danger" size="sm">Remove</Button>
+                                    <Button onClick={()=>onClickToEdit(item.student_id)} variant="primary" size="sm">Edit</Button>
+                                    <Button onClick={()=>onClickDelete(item.student_id)} variant="danger" size="sm"><MdDelete/>Remove</Button>
                                 </Stack>
                             </td>
                         </tr>
                     )
                 })
             }
-         
         </tbody>
       </Table>
     </div>

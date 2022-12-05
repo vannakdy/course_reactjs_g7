@@ -1,11 +1,20 @@
 import {useState,useEffect} from "react";
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-import Stack from 'react-bootstrap/Stack';
+// import Col from 'react-bootstrap/Col';
+// import Form from 'react-bootstrap/Form';
+// import Row from 'react-bootstrap/Row';
+// import Button from 'react-bootstrap/Button';
+// import Stack from 'react-bootstrap/Stack';
+import {
+    Col,
+    Form,
+    Row,
+    Button,
+    Stack,
+    Spinner
+} from "react-bootstrap"
 import axios from "axios";
 import {useNavigate,useParams} from 'react-router-dom'
+const base_url = "https://nodejs-course-g2.vercel.app/";
 
 const StudentCreatePage = () => {
     const navigate = useNavigate();
@@ -18,6 +27,8 @@ const StudentCreatePage = () => {
     const [email,setEmail] = useState("")
     const [description,setDescription] = useState("")
 
+    const [loading,setLoading] = useState(false);
+
     useEffect(()=>{
         if(params.id != undefined){
             getStudentById(); // call function get student by id when open for edit
@@ -26,8 +37,9 @@ const StudentCreatePage = () => {
     },[])
 
     const getStudentById = () => {
+        setLoading(true)
         axios({
-            url: "http://localhost:8080/api/student/"+params.id,
+            url: base_url + "api/student/"+params.id,
             method: "GET",
             data: {},
             headers: {},
@@ -35,7 +47,7 @@ const StudentCreatePage = () => {
             var data = res.data;
             if(data && data.list.length > 0){
                 var objStudent = data.list[0];
-
+                setLoading(false)
                 setFirstname(objStudent.firstname)
                 setLastname(objStudent.lastname)
                 setGender(objStudent.gender)
@@ -75,8 +87,9 @@ const StudentCreatePage = () => {
     }
 
     const onClickSave = () => {
+        setLoading(true)
         axios({
-            url: "http://localhost:8080/api/student",
+            url: base_url + "api/student",
             method: "POST",
             data: {
               "firstname" : firstname,
@@ -89,6 +102,7 @@ const StudentCreatePage = () => {
             headers: {},
           }).then((res) => {
             var data = res.data;
+            setLoading(false)
             navigate("/student")
           }).catch(err=>{
             console.log(err)
@@ -100,8 +114,9 @@ const StudentCreatePage = () => {
     }
 
     const onClickSaveNew = () => {
+        setLoading(true)
         axios({
-            url: "http://localhost:8080/api/student",
+            url: base_url + "api/student",
             method: "POST",
             data: {
               "firstname" : firstname,
@@ -114,6 +129,7 @@ const StudentCreatePage = () => {
             headers: {},
           }).then((res) => {
             var data = res.data;
+            setLoading(false)
             setFirstname("");
             setLastname("");
             setGender(0);
@@ -126,8 +142,9 @@ const StudentCreatePage = () => {
     }
 
     const onClickUpdate = () => {
+        setLoading(true)
         axios({
-            url: "http://localhost:8080/api/student",
+            url: base_url + "api/student",
             method: "PUT",
             data: {
               "student_id": params.id,
@@ -141,6 +158,7 @@ const StudentCreatePage = () => {
             headers: {},
           }).then((res) => {
             var data = res.data;
+            setLoading(false)
             navigate("/student")
           }).catch(err=>{
             console.log(err)
@@ -159,6 +177,11 @@ const StudentCreatePage = () => {
             <div>description : {description}</div> */}
 
             <hr/>
+
+            {loading && <div style={{textAlign:'center'}}>
+                <Spinner animation="border" variant="secondary" /> 
+            </div>}
+
             <Form>
                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                     <Form.Label column sm="2">First name</Form.Label>
