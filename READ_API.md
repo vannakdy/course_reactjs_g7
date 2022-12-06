@@ -1,4 +1,5 @@
 homework : teacher
+base_url = "https://nodejs-course-g2.vercel.app/"
 # teacher : 
     + list
         url: localhost:8080/api/teacher

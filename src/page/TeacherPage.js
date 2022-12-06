@@ -1,27 +1,32 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 // import Table from 'react-bootstrap/Table';
-import {Button, Table, Stack} from 'react-bootstrap';
-import {MdDelete} from "react-icons/md"
+import {Button, Table, Stack,Pagination} from 'react-bootstrap';
+import {MdDelete} from "react-icons/md";
+import Loading from "../components/loading/Loading";
 
+const base_url = "https://nodejs-course-g2.vercel.app/";
 
 function TeacherPage() {
+
   const [listTeacher, setListTeacher] = useState([]);
+  const [loading,setLoading] = useState(false)
 
   useEffect(() => {
     getListTeacher();
   }, []);
 
   const getListTeacher = () => {
+    setLoading(true)
     axios({
-      url: "http://localhost:8080/api/teacher",
+      url: base_url + "api/teacher",
       method: "GET",
       data: {},
       headers: {},
     }).then((res) => {
       var data = res.data;
-      console.log(data)
       setListTeacher(data.list);
+      setLoading(false)
     });
   };
 
@@ -31,6 +36,11 @@ function TeacherPage() {
         <h1>Teacher {listTeacher.length}</h1>
         <Button variant="primary" size="sm"><MdDelete/>New</Button>
       </div>
+
+      <Loading 
+        loading={loading} 
+      />
+
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
@@ -71,6 +81,26 @@ function TeacherPage() {
          
         </tbody>
       </Table>
+      <Pagination size="sm">
+        <Pagination.Item 
+          key={1} 
+          active={true}
+        >
+          {1}
+        </Pagination.Item>
+        <Pagination.Item 
+          key={2} 
+          active={false}
+        >
+          {2}
+        </Pagination.Item>
+        <Pagination.Item 
+          key={3} 
+          active={false}
+        >
+          {3}
+        </Pagination.Item>
+      </Pagination>
     </div>
   );
 }
